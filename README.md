@@ -5,23 +5,15 @@ Welcome to the Database Project repository, a comprehensive solution developed f
 
 ## Repository Structure
 - **/src**: Source code files reside here.
-  - **`studentname_a2_cpp.cpp`**: Individual C++ files for each group member.
-  - **`groupname_a2_cpp.cpp`**: Combined C++ file for the entire group.
 - **/docs**: Documentation files are stored here.
-  - **`studentname_a2_output.docx`**: Individual output documentation.
-  - **`groupname_a2_output.docx`**: Combined output documentation.
-- **/demo**: Materials for the online demo are available here.
-  - **`demo_presentation.pdf`**: Presentation slides for the online demo.
+- **/info**: Materials for the project instructions are available here.
+
 
 ## How to Run
 1. Open the C++ files in an integrated development environment (IDE) such as Visual Studio or Code::Blocks.
 2. Ensure Oracle SQL Developer is set up and connected to the database.
 3. Compile and run the C++ program, following the prompts to perform various database operations.
+4. Also , ensure all the .dll files and other instructions are properly followed.
 
 ## Contributors
-- List of group members who contributed to the project.
-
-## Online Demo
-A short online demo with the professor will showcase the application, explaining individual roles, and demonstrating the SQL procedures and C++ program executions.
-
-For any inquiries or issues, please contact the project contributors.
+- Names and other info of all the group members are hidden / altered to safeguard privacy and college rules.

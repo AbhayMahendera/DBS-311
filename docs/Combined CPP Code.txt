@@ -1,0 +1,185 @@
+
+
+//MS1
+//Oct 13, 2023
+//DBS311NBB
+//
+#include <iostream>
+#include <occi.h>
+#include <iomanip>
+#include <ctime>
+#include <time.h>
+
+using oracle::occi::Environment;
+using oracle::occi::Connection;
+using namespace oracle::occi;
+using namespace std;
+
+
+int menu(void)
+{
+	int opt = 0;
+	cout << "\n\n********************* Menu *********************\n" << endl;
+	cout << "0) Exit" << endl;
+	cout << "1) Mall" << endl;
+	cout << "2) Maintenance" << endl;
+	cout << "3) Store" << endl;
+	cout << "4) Store Employee" << endl;
+	cout << "5) Store Products" << endl;
+	cout << "6) Transactions" << endl;
+
+	cout << "\nEnter your choice: ";
+	cin >> opt;
+	cout << endl;
+
+	return opt;
+}
+
+int main(void) {
+	// OCCI Variables
+	Environment* env = nullptr;
+	Connection* conn = nullptr;
+	// User Variables
+	string str;
+	string usr = "dbs311_233nbb18"; // login dbs
+	string pass = "56153463";// password dbs
+	string srv = "myoracle12c.senecacollege.ca:1521/oracle12c";
+
+	int opt = 1;
+
+	try
+	{
+		env = Environment::createEnvironment(Environment::DEFAULT);
+		conn = env->createConnection(usr, pass, srv);
+		cout << "\nGroup number :- 3\n" << endl;
+		cout << "Group Members = " << "\nKent Phong\nAbhay Mahendera\nGregory Rodriguez" << endl;
+
+		while (opt != 0)
+		{
+			opt = menu();
+			cout << endl;
+
+			switch (opt)
+			{
+			case 1:
+			{
+				Statement* stmt = conn->createStatement();
+				ResultSet* rs = stmt->executeQuery("SELECT mall_id, mallname, phonenum, address, city FROM MALL FETCH FIRST 5 ROWS ONLY");
+				cout << "Mall ID" << "    " << "Mall Name" << "         " << "                      Phone Number" << "        " << "Address                  City" << endl;
+				while (rs->next())
+				{
+					int mall_id = rs->getInt(1);
+					string mall_name = rs->getString(2);
+					int phone_number = rs->getInt(3);
+					string address = rs->getString(4);
+					string city = rs->getString(5);
+					cout << left << setw(11) << mall_id << left << setw(40) << mall_name << left << setw(20) << phone_number << left << setw(25) << address << left << setw(20) << city << endl;
+				}
+				conn->terminateStatement(stmt);
+				break;
+			}
+			case 2:
+			{
+				Statement* stmt1 = conn->createStatement();
+				ResultSet* rs1 = stmt1->executeQuery("SELECT maintenance_id, mall_id, contractorcompany, dutydescription, scheduleddate FROM maintenance FETCH FIRST 5 ROWS ONLY");
+				cout << "Maintenance ID" << "   " << "Mall_id" << "   " << "Contractor Company" << "            " << "Duty Description" << "                 "<< "Scheduled Date" << endl;
+				while (rs1->next())
+				{
+					int main_id = rs1->getInt(1);
+					int mall_id = rs1->getInt(2);
+					string contractorCompany = rs1->getString(3);
+					string dutyDesc = rs1->getString(4);
+					Date date1 = rs1->getDate(5);
+					cout << left << setw(17) << main_id << left << setw(10) << mall_id << left << setw(30) << contractorCompany << left << setw(30) << dutyDesc << right << setw(12) << date1.toText() << endl;
+				}
+				conn->terminateStatement(stmt1);
+				break;
+			}
+			case 3:
+			{
+				Statement* stmt2 = conn->createStatement();
+				ResultSet* rs2 = stmt2->executeQuery("SELECT store_id, mall_id, storename, phonenumber, unitnumber FROM stores FETCH FIRST 5 ROWS ONLY");
+				cout << "Store_ID" << "  " << "Mall_id" << "   " << "Store Name" << "      " << "              Phone Number" << "     " << "Unit Number" << endl;
+				while (rs2->next())
+				{
+
+					int store_id = rs2->getInt(1);
+					int mall_id = rs2->getInt(2);
+					string storeName = rs2->getString(3);
+					int phone_num = rs2->getInt(4);
+					int unit_num = rs2->getInt(5);
+
+					cout << left << setw(10) << store_id << left << setw(10) << mall_id << left << setw(30) << storeName << left << setw(17) << phone_num << left << setw(17) << unit_num << endl;
+				}
+				conn->terminateStatement(stmt2);
+				break;
+			}
+			case 4:
+			{
+				Statement* stmt3 = conn->createStatement();
+				ResultSet* rs3 = stmt3->executeQuery("SELECT employee_id, store_id, employeename, jobtitle, hoursworked FROM storeemployee FETCH FIRST 5 ROWS ONLY");
+				cout << "Employee ID" << "    " << "Store ID" << "    " << "Employeename" << "             " << "Job Title" <<  "          " << "Hours Worked" << endl;
+				while (rs3->next())
+				{
+
+					int emp_id = rs3->getInt(1);
+					int store_id = rs3->getInt(2);
+					string name = rs3->getString(3);
+					string jobTitle = rs3->getString(4);
+					int hoursWorked = rs3->getInt(5);
+
+					cout << left << setw(15) << emp_id << left << setw(12) << store_id << left << setw(25) << name << left << setw(25)<< jobTitle << left << setw(12) << hoursWorked << endl;
+				}
+				conn->terminateStatement(stmt3);
+				break;
+			}
+			case 5:
+			{
+				Statement* stmt4 = conn->createStatement();
+				ResultSet* rs4 = stmt4->executeQuery("SELECT product_id, productname, store_id, qtyinstock, saleprice, msrp FROM storeproduct FETCH FIRST 5 ROWS ONLY");
+				cout << "Product ID" << "    " << "Product Name" << "         " << "Store ID" << "    " << "QtyInStock" << "  " << "Sale Price" << "  " << "MSRP" << endl;
+				while (rs4->next())
+				{
+					int prod_id = rs4->getInt(1);
+					string prod_name = rs4->getString(2);
+					int store_id = rs4->getInt(3);
+					int qtyInStock = rs4->getInt(4);
+					double salePrice = rs4->getDouble(5);
+					double msrp = rs4->getDouble(6);
+
+					cout << left << setw(14) << prod_id << left << setw(21) << prod_name << left << setw(9) << store_id << setw(10) << right << qtyInStock << setw(10) << right << salePrice << setw(10) << right << msrp << "     " << endl;
+				}
+				conn->terminateStatement(stmt4);
+				break;
+			}
+			case 6:
+			{
+				Statement* stmt5 = conn->createStatement();
+				ResultSet* rs5 = stmt5->executeQuery("SELECT transaction_id, store_id, paymentmethod, paymentamount, paymentdate FROM transaction FETCH FIRST 5 ROWS ONLY");
+				cout << "Transaction-ID" << "   " << "Store_ID" << "      " << "Payment Method" << "   " << "Payment Amount" << "     " << "Date" << endl;
+				while (rs5->next())
+				{
+
+					int trans_id = rs5->getInt(1);
+					int store_id = rs5->getInt(2);
+					string payment_method = rs5->getString(3);
+					double payment_amt = rs5->getDouble(4);
+					Date date = rs5->getDate(5);
+
+					cout << left << setw(18) << trans_id << left << setw(15) << store_id << left << setw(9) << payment_method << "         " << setw(10) << right << payment_amt << "      " << right << date.toText() << endl;
+				}
+				conn->terminateStatement(stmt5);
+				break;
+			}
+			}
+		}
+		env->terminateConnection(conn);
+		Environment::terminateEnvironment(env);
+	}
+	catch (SQLException& sqlExcp)
+	{
+		cout << sqlExcp.getErrorCode() << ": " << sqlExcp.getMessage();
+	}
+	return 0;
+}
+
