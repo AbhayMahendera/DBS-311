@@ -6,7 +6,7 @@ Welcome to the Database Project repository, a comprehensive solution developed f
 ## Repository Structure
 - **/src**: Source code files reside here.
 - **/docs**: Documentation files are stored here.
-- **/info**: Materials for the project instructions are available here.
+- **/Info**: Materials for the project instructions are available here.
 
 
 ## How to Run
