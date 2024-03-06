@@ -1,7 +1,7 @@
 # Database Project with SQL, PL/SQL, and C++ Integration
 
 ## Overview
-Welcome to the Database Project repository, a comprehensive solution developed for Assignment 2. This project focuses on expanding an existing database design to better support a business application, integrating SQL, PL/SQL, and C++ technologies. The result is a robust system that seamlessly combines the power of a relational database with the versatility of a C++ interface.
+Welcome to the Database Project repository, a comprehensive solution developed for management of a Mall. This project focuses on expanding an existing database design to better support a business application, integrating SQL, PL/SQL, and C++ technologies. The result is a robust system that seamlessly combines the power of a relational database with the versatility of a C++ interface.
 
 ## Repository Structure
 - **/src**: Source code files reside here.
